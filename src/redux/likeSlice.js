@@ -8,8 +8,14 @@ const likeSlice = createSlice({
   name: "likes",
   initialState,
   reducers: {
-    increment: (state) => state.likes++,
-    decrement: (state) => state.likes--,
+    increment: (state) => {
+      state.likes++;
+    },
+    decrement: (state) => {
+      if (state.likes > 0) {
+        state.likes--;
+      }
+    },
   },
 });
 
