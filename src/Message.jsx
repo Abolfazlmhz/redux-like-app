@@ -7,8 +7,7 @@ const Message = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <p>سلام</p>
-      <button onClick={() => dispatch(increment())}>پسندیدم</button>
-      {" "}
+      <button onClick={() => dispatch(increment())}>پسندیدم</button>{" "}
       <button onClick={() => dispatch(decrement())}>نپسندیدم</button>
       <span> {likes}</span>
     </div>

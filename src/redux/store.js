@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import likeReducer from "./likeSlice"
+import { messageApi } from "./messageApi";
 
 const store = configureStore({
-    reducer: { like: likeReducer }
-})
+  reducer: { [messageApi.reducerPath]: messageApi.reducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(messageApi.middleware),
+});
 
 export default store;
