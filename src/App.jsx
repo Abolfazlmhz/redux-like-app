@@ -1,4 +1,4 @@
-import Message from "./Message";
+import Message from "./components/Message";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 function App() {
