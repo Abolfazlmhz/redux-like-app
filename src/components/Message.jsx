@@ -7,7 +7,10 @@ import {
 } from "../redux/messageApi";
 
 const Message = () => {
-  const { isLoading, error, data: messages } = useGetMessageQuery();
+  const { isLoading, error, data } = useGetMessageQuery();
+  const messages = data
+    ? data.ids.map((id) => data.entities[id])
+    : [];
   const [addMessage] = useAddMessageMutation();
   const [addLike] = useLikeMessageMutation();
   const [deleteMessage] = useDeleteMessageMutation();
@@ -27,10 +30,7 @@ const Message = () => {
     const newLikes = currentLikes > 0 ? currentLikes - 1 : 0;
     await addLike({ id, likes: newLikes });
   };
-  const handleDeleteMessage = async (id) => {
-    await deleteMessage(id);
-  };
-
+ 
   return (
     <div style={{ textAlign: "center" }}>
       <h1>پیام‌ها</h1>
@@ -51,7 +51,7 @@ const Message = () => {
               </button>
               <span> {message.likes}</span>
               <button
-                onClick={() => handleDeleteMessage(message.id)}
+                onClick={() => deleteMessage(message.id)}
                 style={{ marginRight: "10px", color: "red" }}
               >
                 حذف

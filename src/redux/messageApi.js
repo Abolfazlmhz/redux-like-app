@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { messageAdapter } from "./messageAdapter";
 
 export const messageApi = createApi({
   reducerPath: "messageApi",
@@ -7,6 +8,8 @@ export const messageApi = createApi({
   endpoints: (builder) => ({
     getMessage: builder.query({
       query: () => "messages",
+      transformResponse: (res) =>
+        messageAdapter.setAll(messageAdapter.getInitialState(), res),
       providesTags: ["Messages"],
     }),
     addMessage: builder.mutation({
@@ -39,5 +42,5 @@ export const {
   useGetMessageQuery,
   useAddMessageMutation,
   useLikeMessageMutation,
-  useDeleteMessageMutation
+  useDeleteMessageMutation,
 } = messageApi;
