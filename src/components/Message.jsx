@@ -3,12 +3,14 @@ import {
   useGetMessageQuery,
   useAddMessageMutation,
   useLikeMessageMutation,
+  useDeleteMessageMutation,
 } from "../redux/messageApi";
 
 const Message = () => {
   const { isLoading, error, data: messages } = useGetMessageQuery();
   const [addMessage] = useAddMessageMutation();
   const [addLike] = useLikeMessageMutation();
+  const [deleteMessage] = useDeleteMessageMutation();
   const [newMessage, setNewMessage] = useState("");
 
   const handleAddMessage = async () => {
@@ -25,6 +27,10 @@ const Message = () => {
     const newLikes = currentLikes > 0 ? currentLikes - 1 : 0;
     await addLike({ id, likes: newLikes });
   };
+  const handleDeleteMessage = async (id) => {
+    await deleteMessage(id);
+  };
+
   return (
     <div style={{ textAlign: "center" }}>
       <h1>پیام‌ها</h1>
@@ -44,6 +50,12 @@ const Message = () => {
                 نپسندیدم
               </button>
               <span> {message.likes}</span>
+              <button
+                onClick={() => handleDeleteMessage(message.id)}
+                style={{ marginRight: "10px", color: "red" }}
+              >
+                حذف
+              </button>
             </div>
           </div>
         ))}

@@ -25,6 +25,13 @@ export const messageApi = createApi({
       }),
       invalidatesTags: ["Messages"],
     }),
+    deleteMessage: builder.mutation({
+      query: (id) => ({
+        url: `messages/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Messages"],
+    }),
   }),
 });
 
@@ -32,4 +39,5 @@ export const {
   useGetMessageQuery,
   useAddMessageMutation,
   useLikeMessageMutation,
+  useDeleteMessageMutation
 } = messageApi;
